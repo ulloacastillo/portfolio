@@ -1,0 +1,34 @@
+---
+import Card from '../Card.astro'
+
+const cardStyle = 'flex flex-col gap-2 px-8 py-6'
+const cardTitle = 'bg-clip-text text-2xl font-semibold mb-7'
+
+const education = [
+  {
+    university: 'Universidad Austral de Chile',
+    description: 'Ingeniero Civil en Informática'
+  },
+  {
+    university: 'Universidad de Santiago de Compostela',
+    description:
+      'Pasantía de un Semestre. Realicé cursos de Desarrollo de Aplicaciones Web y Aprendizaje Automático'
+  }
+]
+---
+
+<Card className=`${cardStyle}`>
+  <div class='flex-1'>
+    <h2 class={cardTitle}>Educación</h2>
+    <div class='flex flex-col gap-10'>
+      {
+        education.map((ed) => (
+          <div class='flex flex-col gap-2'>
+            <h2 class='text-lg font-bold text-yellow-600	'>{ed.university}</h2>
+            <p class='p-0 m-0 text-sm '>{ed.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Card>

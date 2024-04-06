@@ -1,0 +1,91 @@
+---
+import Card from '../Card.astro'
+import Section from '../Section.astro'
+import LinkButton from '../LinkButton.astro'
+import Link from '../icons/Link.astro'
+import Wordpress from '../icons/Wordpress.astro'
+import Javascript from '../icons/Javascript.astro'
+import Express from '../icons/Express.astro'
+import Tailwind from '../icons/Tailwind.astro'
+
+const TAGS = {
+  Javascript: {
+    name: 'JavaScript',
+    class: 'bg-black text-white',
+    icon: Javascript
+  },
+  Wordpress: {
+    name: 'Wordpress',
+    class: 'bg-[#003159] text-white',
+    icon: Wordpress
+  },
+  Express: {
+    name: 'Express',
+    class: 'bg-black text-white',
+    icon: Express
+  }
+}
+
+const projects = [
+  {
+    img: './mapa-calor.png',
+    title: 'Mapa de Calor',
+    technologies: [TAGS.Javascript, TAGS.Express],
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrs standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+  },
+  {
+    img: './informatica.png',
+    title: 'Sitio Web Escuela de Informática UACh',
+    technologies: [TAGS.Wordpress],
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrs standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+    href: 'http://informatica.uach.cl'
+  },
+  {
+    img: './mapa-calor.png',
+    title: 'Mapa de Calor',
+    technologies: [TAGS.Javascript, TAGS.Express],
+    description:
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrs standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+  }
+]
+---
+
+<Section title='Algunos proyectos realizados'>
+  <main class='flex flex-col lg:flex-row justify-between gap-3 py-3'>
+    {
+      projects.map((p) => (
+        <Card className=''>
+          <img src={p.img} class='rounded-lg hover:scale-105 transition-all' />
+          <div class='px-3 mt-2 py-3'>
+            <h3 class='text-lg font-semibold mb-2 '> {p.title}</h3>
+            <ul class='flex flex-row mb-2 gap-x-2'>
+              {p.technologies.map((tag) => (
+                <li>
+                  <span
+                    class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 `}
+                  >
+                    <tag.icon class='size-4' />
+                    {tag.name}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p class='my-3 text-sm font-light text-pretty px-2'>
+              {p.description}
+            </p>
+            {p.href && (
+              <LinkButton href={p.href}>
+                <>
+                  <p class='text-sm'>Más detalles</p>
+                  <Link />
+                </>
+              </LinkButton>
+            )}
+          </div>
+        </Card>
+      ))
+    }
+  </main>
+</Section>
