@@ -6,7 +6,11 @@ import Link from '../icons/Link.astro'
 import Wordpress from '../icons/Wordpress.astro'
 import Javascript from '../icons/Javascript.astro'
 import Express from '../icons/Express.astro'
-//import Tailwind from '../icons/Tailwind.astro'
+import Next from '../icons/Next.astro'
+import Node from '../icons/Node.astro'
+import D3 from '../icons/D3.astro'
+
+import Tailwind from '../icons/Tailwind.astro'
 
 const TAGS = {
   Javascript: {
@@ -23,6 +27,26 @@ const TAGS = {
     name: 'Express',
     class: 'bg-black text-white',
     icon: Express
+  },
+  Next: {
+    name: 'Next',
+    class: 'bg-black text-white',
+    icon: Next
+  },
+  Node: {
+    name: 'Node',
+    class: 'bg-black text-white',
+    icon: Node
+  },
+  D3: {
+    name: 'D3',
+    class: 'bg-black text-white',
+    icon: D3
+  },
+  Tailwind: {
+    name: 'Tailwind',
+    class: 'bg-black text-white',
+    icon: Tailwind
   }
 }
 
@@ -32,31 +56,59 @@ const projects = [
     title: 'Mapa de Calor',
     technologies: [TAGS.Javascript, TAGS.Express],
     description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrs standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+      'Dado un archivo con ciudades se creo un mapa de calor que detecta aumáticamente a que país corresponde y pinta las regiones y ciudades correspodientes segun una escala de color que varia en funcion de la aparición de cada una.',
+    video: 'mapa-calor.mp4'
   },
   {
     img: './informatica.png',
     title: 'Sitio Web Escuela de Informática UACh',
     technologies: [TAGS.Wordpress],
     description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrs standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+      'Para mi carrera de Ingeniería Civil en Informáica, junto a dos personas craemos la Landing Page utilizando Wordpress',
     href: 'http://informatica.uach.cl'
   },
   {
-    img: './mapa-calor.png',
-    title: 'Mapa de Calor',
-    technologies: [TAGS.Javascript, TAGS.Express],
+    img: './graficos.webp',
+    title: 'Gáficos personalizables',
+    technologies: [TAGS.Next, TAGS.Node, TAGS.Tailwind, TAGS.D3],
     description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrs standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+      'Aplicación Web para la creación de gráficos de frecuencia, se pueden subir los datos a través de un archivo excel o cargarlos manualemnte en csv, genera un gráfico completamente personalizable.',
+    video: 'graficos.mp4'
   }
 ]
 ---
 
 <Section title='Algunos proyectos realizados'>
-  <main class='flex flex-col lg:flex-row justify-between gap-3 py-3'>
+  <dialog class='relative w-[100vw] h-[100vh] bg-transparent'>
+    <div class='flex w-full h-full mx-auto my-0'>
+      <video class='mx-auto my-0' autoplay id='video' width='800px' src=''
+      ></video>
+    </div>
+
+    <button
+      id='closeModal'
+      class='absolute top-4 right-4 group inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-neutral-950'
+      ><div class='transition duration-300 group-hover:rotate-[360deg]'>
+        <svg
+          width='15'
+          height='15'
+          viewBox='0 0 15 15'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
+          class='h-5 w-5 text-neutral-200'
+          ><path
+            d='M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z'
+            fill='currentColor'
+            fill-rule='evenodd'
+            clip-rule='evenodd'></path></svg
+        >
+      </div></button
+    >
+  </dialog>
+  <main class='relative flex flex-col lg:flex-row justify-between gap-3 py-3'>
     {
       projects.map((p) => (
-        <Card className=''>
+        <Card className='flex-1 relative'>
           <img src={p.img} class='rounded-lg hover:scale-105 transition-all' />
           <div class='px-3 mt-2 py-3'>
             <h3 class='text-lg font-semibold mb-2 '> {p.title}</h3>
@@ -72,16 +124,24 @@ const projects = [
                 </li>
               ))}
             </ul>
-            <p class='my-3 text-sm font-light text-pretty px-2'>
+            <p class='my-3 text-sm font-light text-pretty px-2 pb-10'>
               {p.description}
             </p>
             {p.href && (
-              <LinkButton href={p.href}>
+              <LinkButton href={p.href} className='absolute bottom-3'>
                 <>
                   <p class='text-sm'>Más detalles</p>
                   <Link />
                 </>
               </LinkButton>
+            )}
+            {p.video && (
+              <button class='absolute bottom-3 show-video cursor-pointer inline-flex items-center justify-center gap-2 px-3 py-2 space-x-2 text-base text-white transition bg-gray-800 border border-gray-600 focus-visible:ring-yellow-500/80 text-md hover:bg-gray-800 hover:border-gray-900 group max-w-fit rounded-xl hover:text-white focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-white focus-visible:ring-offset-2 active:bg-black'>
+                <>
+                  <p class='text-sm'>Ver más</p>
+                  <Link />
+                </>
+              </button>
             )}
           </div>
         </Card>
@@ -89,3 +149,56 @@ const projects = [
     }
   </main>
 </Section>
+<style>
+  dialog::backdrop {
+    backdrop-filter: blur(4px);
+  }
+</style>
+
+<script>
+  const videoProjects = [{ video: 'mapa-calor.mp4' }, { video: 'graficos.mp4' }]
+  const showVideoButtons = document.querySelectorAll('.show-video')
+  console.log(showVideoButtons)
+  const modal = document.querySelector('dialog')
+  const closeModalButton = document.getElementById('closeModal')
+  const video = document.getElementById('video') as HTMLSourceElement
+
+  document.addEventListener('keydown', (event) => {
+    if (modal?.open) {
+      if (event.key === 'Escape') {
+        //if esc key was not pressed in combination with ctrl or alt or shift
+        console.log('a')
+        const isNotCombinedKey = !(
+          event.ctrlKey ||
+          event.altKey ||
+          event.shiftKey
+        )
+        if (isNotCombinedKey) {
+          document.body.classList.remove('overflow-y-hidden')
+        }
+      }
+      modal.addEventListener('click', () => {
+        modal?.close()
+        document.body.classList.remove('overflow-y-hidden')
+      })
+    }
+  })
+
+  closeModalButton?.addEventListener('click', () => {
+    modal?.close()
+    document.body.classList.remove('overflow-y-hidden')
+  })
+
+  showVideoButtons.forEach((button, i) => {
+    button.addEventListener('click', () => {
+      console.log('button video')
+      console.log(video, i, videoProjects)
+      if (videoProjects[i].video) {
+        console.log(videoProjects[i])
+        video.src = videoProjects[i].video ?? ''
+        modal?.showModal()
+        document.body.classList.add('overflow-y-hidden')
+      }
+    })
+  })
+</script>

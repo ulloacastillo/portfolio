@@ -10,7 +10,7 @@ const experiences = [
     rol: 'Desarrollador de Software',
     start: 'Ocubre 2023',
     end: 'Marzo 2023',
-    description: 'En los 5 meses se desarrollaron 3 proyectos Fullstack ...'
+    description: `Se desarrollaron 5 proyectos con diferentes tecnologías: análisis y scrapping de datos con Pandas, Matplotlib, Selenium, y 3 aplicaciones web con NextJS, ExpressJS, Tailwind y APIs externas. Se automatizaron procesos de gráficos y mapas de calor desde Excel y se analizaron datos de reclamos de empresas a nivel nacional.`
   },
   {
     company: 'Motivus',
@@ -18,18 +18,18 @@ const experiences = [
     start: 'Marzo 2022',
     end: 'Junio 2022',
     description:
-      'Para una plataforma de cómputo en la nube, se crearon algoritmos de Random Forest y Decision Tree que puedan competir en Rendimiento contra SK-Learn'
+      'En una antigua start-up, se desarrollaron algoritmos de árboles de decisión y Random Forest en Rust para competir en tiempo de ejecución con SciKitLearn (Python). Se obtuvo una mejora de hasta un 20% en el rendimiento, según benchmarks en el conjunto de prueba.'
   }
 ]
 ---
 
-<Card className=`${cardStyle} w-[60%]]`>
+<Card className=`${cardStyle} lg:max-w-[70%]`>
   <h2 class={cardTitle}>Experiencia Laboral</h2>
   <div class='flex flex-col gap-8'>
     {
       experiences.map((exp) => (
         <div class='flex items-start gap-2'>
-          <div class='w-[40%] flex flex-col gap-2'>
+          <div class='w-[30%] flex flex-col gap-2'>
             <h3 class='text-lg font-bold text-yellow-600	'>{exp.rol}</h3>
             <h4 class='font-normal text-lg  '>{exp.company}</h4>
             <p class='p-0 m-0 text-sm  '>
